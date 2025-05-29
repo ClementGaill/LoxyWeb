@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Loxy...">
+  <meta name="description" content="Télécharge Loxy... sur ton téléphone. Disponible sur App Store et Google Play. Scan le QR Code pour installer depuis ton mobile.">
+  <meta property="og:title" content="Télécharge Loxy...">
+  <meta property="og:description" content="Disponible sur Android et iOS. Télécharge l'application Loxy... et parle aux utilisateurs à proximité !">
+  <meta property="og:image" content="https://loxy-app.com/logo.png">
+  <meta property="og:url" content="https://loxy-app.com/download">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Télécharge Loxy...">
+  <meta name="twitter:description" content="Disponible sur Android et iOS. Télécharge l'application Loxy...">
+  <meta name="twitter:image" content="https://loxy-app.com/logo.png">
+  <title>Télécharger Loxy...</title>
+  <link rel="icon" href="./logo.png" type="image/png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+    
+    body {
+        width: 100%;
+        overflow-x: hidden;
+        font-family: "Space Grotesk", sans-serif;
+    }
+    header {
+        padding: 50px 50px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    header h2 {
+        font-size: 2rem;
+    }
+
+    header a {
+        color: inherit;
+        text-decoration: inherit;
+    }
+    main.container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    @media (min-width: 768px) {
+      main.container {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+    .left {
+      max-width: 500px;
+    }
+    .left h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .left p {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+    .store-buttons img {
+      width: 150px;
+      margin: 0.5rem;
+      cursor: pointer;
+    }
+    .qr-code {
+      align-items: center;  
+      justify-items: center;
+      font-weight: 700;
+      display: none;
+    }
+    @media (min-width: 768px) {
+      .qr-code {
+        align-items: center;  
+        display: block;
+      }
+    }
+    .app-icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="https://loxy-app.com"><h2>Loxy...</h2></a>
+  </header>
+  <main class="container">
+    <section class="left">
+      <h1>Télécharge l'application Loxy...</h1>
+      <p>Disponible sur Android et iOS. Simple à installer.</p>
+      <div class="store-buttons">
+        <a href="https://play.google.com/store/apps/details?id=com.loxy.app&hl=fr" target="_blank" rel="noopener noreferrer">
+          <img src="./d-google.png" alt="Disponible sur Google Play">
+        </a>
+        <a href="https://apps.apple.com/fr/app/loxy/id6627342459" target="_blank" rel="noopener noreferrer">
+          <img src="./d-apple.svg" alt="Télécharger sur l’App Store">
+        </a>
+      </div>
+    </section>
+    <aside class="qr-code">
+        <p>Scan le QR Code pour télécharger l'app !</p>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://loxy-app.com/download" alt="QR Code pour télécharger l'application Loxy...">
+    </aside>
+  </main>
+</body>
+</html>
