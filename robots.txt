@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://loxy-app.com/sitemap.xml

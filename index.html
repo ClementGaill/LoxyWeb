@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <!-- Métadonnées de base -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Loxy... te permet de rencontrer des personnes dans un rayon de 500m autour de toi !">
-    <meta name="author" content="Loxy... Corp.">
-    <meta name="keywords" content="Loxy, loxy, rencontre, proximité, localisation, chat, amis, social, dating, application, mobile, géolocalisation, 500m, réseau social, nouvelles rencontres, rencontres, connexion,">
-    <meta name="robots" content="index, follow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO de base -->
+  <title>Loxy... - Rencontres à proximité dans un rayon de 500m</title>
+  <meta name="description" content="Loxy... te permet de rencontrer des personnes autour de toi dans un rayon de 500 mètres. Simple, local, social.">
+  <meta name="author" content="Loxy... Corp.">
+  <meta name="keywords" content="Loxy..., rencontre locale, proximité, réseau social, géolocalisation, app mobile">
+  <meta name="robots" content="index, follow">
 
-    <!-- Balises Open Graph pour le partage sur les réseaux sociaux -->
-    <meta property="og:title" content="Loxy... - Le réseau social qui rapproche !">
-    <meta property="og:description" content="Loxy... te permet de rencontrer des personnes dans un rayon de 500m autour de toi !">
-    <meta property="og:image" content="https://www.loxy-app.com/twitter-image.png">
-    <meta property="og:url" content="https://www.loxy-app.com">
-    <meta property="og:type" content="website">
+  <!-- Open Graph (partage réseaux sociaux) -->
+  <meta property="og:title" content="Loxy... - Le réseau social qui rapproche">
+  <meta property="og:description" content="Rencontre des personnes proches de toi dans un rayon de 500m grâce à Loxy...">
+  <meta property="og:image" content="https://www.loxy-app.com/assets/logo.png">
+  <meta property="og:url" content="https://www.loxy-app.com">
+  <meta property="og:type" content="website">
 
-    <!-- Balises Twitter Card -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@LoxyApp" />
-    <meta property="og:url" content="https://loxy-app.com" />
-    <meta property="og:title" content="Loxy... - Le réseau social qui rapproche !" />
-    <meta property="og:description" content="Loxy... te permet de rencontrer des personnes dans un rayon de 500m autour de toi !" />
-    <meta property="og:image" content="https://www.loxy-app.com/twitter-image.png" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@LoxyApp">
+  <meta name="twitter:title" content="Loxy... - Le réseau social qui rapproche">
+  <meta name="twitter:description" content="Rencontre des personnes proches de toi dans un rayon de 500m grâce à Loxy...">
+  <meta name="twitter:image" content="https://www.loxy-app.com/assets/logo.png">
 
-    <!-- Titre de la page -->
-    <title>Loxy... - Le réseau social qui rapproche !</title>
-    <link rel="icon" href="./logo.png" type="image/png">
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/logo.png" type="image/png">
 
-    <link rel="stylesheet" href="index.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="/loxy/index.css">
 </head>
 <body>
     <header>
         <h1>Loxy...</h1>
-        <button class="btn-telecharger" aria-label="Télécharger" onclick="window.location.href='download.html';"></button>
+        <button class="btn-telecharger" aria-label="Télécharger" onclick="window.location.href='/download';"></button>
     </header>
     
     <main>
@@ -45,7 +46,7 @@
             <div class="right">
                 <div class="carrousel">
                     <div class="carrousel-track">
-                        <img src="./iPhone.png" alt="">
+                        <img src="./assets/iPhone.png" alt="Aperçu de l'application Loxy sur iPhone">
                     </div>
                 </div>            
             </div>
@@ -66,13 +67,15 @@
     </main>
     
     <footer>
-        <a href="./privacy.html" class="eula-btn">Privacy</a>
+        <a href="/privacy" class="eula-btn">Privacy</a>
     </footer>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-<script src="script.js"></script>
+
+<script defer src="/loxy/script.js"></script>
+
 <script>
     const track = document.querySelector('.carrousel-track');
     const images = track.querySelectorAll('img');
