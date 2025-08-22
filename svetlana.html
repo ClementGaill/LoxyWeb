@@ -8,7 +8,7 @@
     :root {
       --bg: #fff;
       --panel: #c5c5c5;
-      --muted: #5e83b6;
+      --muted: #000;
       --text: #000;
       --accent: #000;
       --card: #5e83b6;
@@ -87,7 +87,7 @@
         card.className = 'card';
 
         const head = document.createElement('header');
-        head.innerHTML = `<div class="title">${item.title}</div><div class="meta">${item.type.toUpperCase()} · ${formatSize(item.size)} · ${item.createdAt}</div>`;
+        head.innerHTML = `<div class="title">${item.title}</div><div class="meta">${item.type.toUpperCase()} · ${item.createdAt}</div>`;
         card.appendChild(head);
 
         if(item.type === 'video'){
