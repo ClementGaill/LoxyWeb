@@ -63,75 +63,126 @@
   <script>
     // --- Données (remplacez les src par vos fichiers en local) ---
     const MEDIA = [
-      { id: "v1", type: "video", title: "Présentation", src: "./assets/svetlana/pres.mp4", size: 12345678, createdAt: "22/08/2025" },
+      //{ id: "v1", type: "video", title: "Présentation", src: "./assets/svetlana/pres.mp4", size: 12345678, createdAt: "22/08/2025" },
       { id: "a1", type: "audio", title: "Medecin", src: "./assets/svetlana/MedecinRuptute.mp3", size: 2345678, createdAt: "21/08/2025" },
+      { id: "t1", type: "text", title: "Presentation", src: "./assets/svetlana/pres.txt", size: 4567, createdAt: "20/08/2025" },
     ];
 
-    const grid = document.getElementById('grid');
-    const q = document.getElementById('q');
-    const type = document.getElementById('type');
-    const clearBtn = document.getElementById('clear');
+      const grid = document.getElementById('grid');
+  const q = document.getElementById('q');
+  const type = document.getElementById('type');
+  const clearBtn = document.getElementById('clear');
 
-    function formatSize(bytes){
-      if (!bytes && bytes !== 0) return '';
-      const units = ['o','Ko','Mo','Go','To'];
-      let i=0; let val = bytes;
-      while(val >= 1024 && i < units.length-1){ val/=1024; i++; }
-      return `${val.toFixed( (i===0)?0:(val<10?1:0) )} ${units[i]}`;
-    }
+  function formatSize(bytes){
+    if (!bytes && bytes !== 0) return '';
+    const units = ['o','Ko','Mo','Go','To'];
+    let i=0; let val = bytes;
+    while(val >= 1024 && i < units.length-1){ val/=1024; i++; }
+    return `${val.toFixed( (i===0)?0:(val<10?1:0) )} ${units[i]}`;
+  }
 
-    function render(items){
-      grid.innerHTML = '';
-      items.forEach(item => {
-        const card = document.createElement('article');
-        card.className = 'card';
+  function exportText(id, title){
+    const textarea = document.getElementById("text-" + id);
+    const blob = new Blob([textarea.value], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = title.replace(/\s+/g, "_") + ".txt";
+    link.click();
+  }
 
-        const head = document.createElement('header');
-        head.innerHTML = `<div class="title">${item.title}</div><div class="meta">${item.type.toUpperCase()} · ${item.createdAt}</div>`;
-        card.appendChild(head);
+  function render(items){
+    grid.innerHTML = '';
+    items.forEach(item => {
+      const card = document.createElement('article');
+      card.className = 'card';
 
-        if(item.type === 'video'){
-          const el = document.createElement('video');
-          el.src = item.src; el.controls = true; el.preload = 'metadata';
-          card.appendChild(el);
-        } else if(item.type === 'audio'){
-          const wrapper = document.createElement('div');
-          wrapper.className = 'audio-player';
+      const head = document.createElement('header');
+      head.innerHTML = `<div class="title">${item.title}</div><div class="meta">${item.type.toUpperCase()} · ${item.createdAt}</div>`;
+      card.appendChild(head);
 
-          const el = document.createElement('audio');
-          el.src = item.src; el.controls = true; el.preload = 'metadata';
-          wrapper.appendChild(el);
+      if(item.type === 'video'){
+        const el = document.createElement('video');
+        el.src = item.src; el.controls = true; el.preload = 'metadata';
+        card.appendChild(el);
+      } else if(item.type === 'audio'){
+        const wrapper = document.createElement('div');
+        wrapper.className = 'audio-player';
+        const el = document.createElement('audio');
+        el.src = item.src; el.controls = true; el.preload = 'metadata';
+        wrapper.appendChild(el);
+        card.appendChild(wrapper);
+      } else if(item.type === 'text'){
+        const wrapper = document.createElement('div');
+        wrapper.className = 'text-player';
+        wrapper.style.border = "1px solid var(--border)";
+        wrapper.style.borderRadius = "10px";
+        wrapper.style.padding = "10px";
+        wrapper.style.background = "#f9f9f9";
+        wrapper.style.marginTop = "8px";
 
-          card.appendChild(wrapper);
-        }
+        const textarea = document.createElement('textarea');
+        textarea.id = "text-" + item.id;
+        textarea.style.width = "100%";
+        textarea.style.height = "180px";
+        textarea.style.resize = "vertical";
+        textarea.style.padding = "10px";
+        textarea.style.border = "1px solid #ccc";
+        textarea.style.borderRadius = "8px";
+        textarea.style.fontFamily = "monospace";
+        textarea.style.fontSize = "14px";
+        textarea.style.background = "#fff";
+        textarea.style.boxShadow = "inset 0 1px 3px rgba(0,0,0,0.1)";
+        wrapper.appendChild(textarea);
 
-        const foot = document.createElement('div');
-        foot.style.display='flex';
-        foot.style.justifyContent='space-between';
-        foot.style.alignItems='center';
-        foot.style.gap='8px';
-        foot.style.padding='10px 14px';
-        foot.style.borderTop='1px solid var(--border)';
-        foot.innerHTML = `<span class="pill">${item.id}</span><a href="${item.src}" download style="color:var(--accent); text-decoration:none;">Télécharger</a>`;
-        card.appendChild(foot);
+        const btn = document.createElement('button');
+        btn.textContent = "💾 Exporter en .txt";
+        btn.style.marginTop = "10px";
+        btn.style.padding = "6px 12px";
+        btn.style.background = "var(--accent)";
+        btn.style.color = "#fff";
+        btn.style.border = "none";
+        btn.style.borderRadius = "6px";
+        btn.style.cursor = "pointer";
+        btn.onmouseover = () => btn.style.opacity = "0.85";
+        btn.onmouseout = () => btn.style.opacity = "1";
+        btn.onclick = () => exportText(item.id, item.title);
+        wrapper.appendChild(btn);
 
-        grid.appendChild(card);
-      });
-    }
+        // Charger le texte depuis le fichier
+        fetch(item.src)
+          .then(res => res.text())
+          .then(txt => textarea.value = txt);
 
-    function applyFilters(){
-      const term = q.value.trim().toLowerCase();
-      const t = type.value;
-      const filtered = MEDIA.filter(m => (t==='all' || m.type===t) && (!term || m.title.toLowerCase().includes(term)));
-      render(filtered);
-    }
+        card.appendChild(wrapper);
+      }
 
-    q.addEventListener('input', applyFilters);
-    type.addEventListener('change', applyFilters);
-    clearBtn.addEventListener('click', () => { q.value=''; type.value='all'; applyFilters(); });
+      const foot = document.createElement('div');
+      foot.style.display='flex';
+      foot.style.justifyContent='space-between';
+      foot.style.alignItems='center';
+      foot.style.gap='8px';
+      foot.style.padding='10px 14px';
+      foot.style.borderTop='1px solid var(--border)';
+      foot.innerHTML = `<span class="pill">${item.id}</span><a href="${item.src}" download style="color:var(--accent); text-decoration:none;">Télécharger</a>`;
+      card.appendChild(foot);
 
-    render(MEDIA);
-  </script>
+      grid.appendChild(card);
+    });
+  }
+
+  function applyFilters(){
+    const term = q.value.trim().toLowerCase();
+    const t = type.value;
+    const filtered = MEDIA.filter(m => (t==='all' || m.type===t) && (!term || m.title.toLowerCase().includes(term)));
+    render(filtered);
+  }
+
+  q.addEventListener('input', applyFilters);
+  type.addEventListener('change', applyFilters);
+  clearBtn.addEventListener('click', () => { q.value=''; type.value='all'; applyFilters(); });
+
+  render(MEDIA);
+</script>
     <script type="module">
         import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
